@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bikeable Days Calendar</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+  <h1>Bikeable Days Calendar</h1>
+  <div id="settings-menu" style="display:none;">
+    <h2>Settings</h2>
+    <form id="settings-form">
+      <label for="minTemp">Minimum Comfortable Temperature (°F):</label>
+      <input type="number" id="minTemp" name="minTemp" value="60">
+      
+      <label for="maxTemp">Maximum Comfortable Temperature (°F):</label>
+      <input type="number" id="maxTemp" name="maxTemp" value="90">
+      
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="latitude" name="latitude" placeholder="Auto-detected or enter manually">
+      
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="longitude" name="longitude" placeholder="Auto-detected or enter manually">
+      
+      <button type="submit">Save</button>
+    </form>
+  </div>
+  <div id="all">
+  <div id="sidebar">
+    <h3>Cities</h3>
+    <form id="city-search-form">
+        <input type="text" id="city-search-input" list="city-suggestions" placeholder="Search for a city" required />
+        <datalist id="city-suggestions"></datalist>
+        <button type="submit">Search</button>
+      </form>
+    <ul id="city-list"></ul>
+    <h2>Settings</h2>
+    <form id="settings-">
+        <label for="minTemp">Minimum Comfortable Temperature (°F):</label>
+        <input type="number" id="minTemp" name="minTemp" value="60" required>
+        
+        <label for="maxTemp">Maximum Comfortable Temperature (°F):</label>
+        <input type="number" id="maxTemp" name="maxTemp" value="90" required>
+        
+        <label for="maxHumidity">Maximum Humidity (%):</label>
+        <input type="number" id="maxHumidity" name="maxHumidity" value="70" required>
+        
+        <label for="maxCloudCoverage">Maximum Cloud Coverage (%):</label>
+        <input type="number" id="maxCloudCoverage" name="maxCloudCoverage" value="50" required>
+        
+        <button type="submit">Save</button>
+      </form>
+  </div>
+  <div id="calendar-container">
+    <div id="calendar"></div>
+  </div>
+</div>
+  <script type="module" src="scripts/script.mjs"></script>
+</body>
+</html>

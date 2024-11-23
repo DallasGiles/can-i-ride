@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f0e6d1;
+  }
+  #all{
+    display: flex;
+    background-color: #1c222f;
+  }
+  h1 {
+    margin-top: 20px;
+  }
+  
+  #sidebar {
+   display: inline;
+   margin-left: 5%;
+   margin-top: 5%;
+   border-radius: 25px;
+   border: 2px solid;
+   background: #f0e6d1;
+   max-width: 20%;
+   }
+
+  #calendar-container {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  #city-list {
+    list-style: none;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+  }
+  
+  #city-list li {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  #city-list li:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+
+   #settings-menu{
+        display: inline;
+    }
+  #calendar {
+    display: flexbox;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .day {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .red {
+    background-color: #ffcccc;
+  }
+  
+  .yellow {
+    background-color: #ffffcc;
+  }
+  
+  .green {
+    background-color: #ccffcc;
+  }
