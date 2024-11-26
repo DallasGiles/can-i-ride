@@ -5,6 +5,9 @@ const citySearchForm = document.getElementById('city-search-form');
 const citySearchInput = document.getElementById('city-search-input');
 const suggestionsElement = document.getElementById('city-suggestions');
 const calendar = document.getElementById('calendar');
+const modal = document.getElementById('settings-modal'); // Modal element
+const openModalBtn = document.getElementById('open-settings'); // Button to open the modal
+const closeModalBtn = document.getElementById('close-modal'); // Button to close the modal
 
 // Utility: Generalized Fetch Function
 const fetchJson = async (url) => {
@@ -41,6 +44,23 @@ const getUserPreferences = () => {
   const maxCloudCoverage = parseFloat(document.getElementById('maxCloudCoverage').value);
   return { minTemp, maxTemp, maxHumidity, maxCloudCoverage };
 };
+// Open the modal
+openModalBtn.addEventListener('click', () => {
+  modal.style.display = 'block';
+  populateSettingsForm();
+});
+
+// Close the modal
+closeModalBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+// Close the modal when clicking outside the modal content
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
 
 // Save Cities to localStorage
 const saveCities = (cities) => {
