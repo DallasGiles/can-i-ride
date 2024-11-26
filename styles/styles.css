@@ -30,20 +30,34 @@ h1 {
   padding: 20px;
 }
 
+.button-general{
+  margin-top: 10px;
+  padding: 3px;
+  border-radius: 10px;
+  border: 2px solid;
+
+}
+
 #city-list {
   list-style: none;
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
+  text-align: start;
 }
 
 #city-list li {
   margin: 10px 0;
+  padding: 10px;
   cursor: pointer;
+  border-radius: 15px;
+  border: 2px solid white;
+  background-color: #1c222f;
+  color: white;
+  
 }
 
 #city-list li:hover {
-  color: blue;
   text-decoration: underline;
 }
 
@@ -60,11 +74,11 @@ h1 {
 }
 
 .day {
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid white;
+  border-radius: 25px;
   padding: 10px;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .red {
@@ -90,6 +104,13 @@ h1 {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+#open-settings{
+  margin-bottom: 5px;
+  padding: 3px;
+  border-radius: 10px;
+  border: 2px solid;
 }
 
 .modal-content {
