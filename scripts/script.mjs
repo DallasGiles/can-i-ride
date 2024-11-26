@@ -5,9 +5,9 @@ const citySearchForm = document.getElementById('city-search-form');
 const citySearchInput = document.getElementById('city-search-input');
 const suggestionsElement = document.getElementById('city-suggestions');
 const calendar = document.getElementById('calendar');
-const modal = document.getElementById('settings-modal'); // Modal element
-const openModalBtn = document.getElementById('open-settings'); // Button to open the modal
-const closeModalBtn = document.getElementById('close-modal'); // Button to close the modal
+const modal = document.getElementById('settings-modal');
+const openModalBtn = document.getElementById('open-settings');
+const closeModalBtn = document.getElementById('close-modal');
 
 // Utility: Generalized Fetch Function
 const fetchJson = async (url) => {
@@ -44,6 +44,7 @@ const getUserPreferences = () => {
   const maxCloudCoverage = parseFloat(document.getElementById('maxCloudCoverage').value);
   return { minTemp, maxTemp, maxHumidity, maxCloudCoverage };
 };
+
 // Open the modal
 openModalBtn.addEventListener('click', () => {
   modal.style.display = 'block';
@@ -148,12 +149,9 @@ const generateCalendar = async (cityName) => {
         const weatherIconUrl = `https://www.weatherbit.io/static/img/icons/${dayWeather.weather.icon}.png`;
         const highTemp = dayWeather.high_temp || 'N/A';
         const lowTemp = dayWeather.low_temp || 'N/A';
-        const windSpeed = dayWeather.wind_spd || 'N/A';
         const humidity = dayWeather.rh || 'N/A';
         const cloudCoverage = dayWeather.clouds || 'N/A';
-        const precipitation = dayWeather.precip || '0';
 
-        // Evaluate conditions based on user preferences
         const isGoodDay =
           highTemp <= maxTemp &&
           lowTemp >= minTemp &&
@@ -166,13 +164,11 @@ const generateCalendar = async (cityName) => {
           humidity <= maxHumidity + 10 &&
           cloudCoverage <= maxCloudCoverage + 20;
 
-        if (isGoodDay) {
-          dayElement.className = 'day green';
-        } else if (isAcceptableDay) {
-          dayElement.className = 'day yellow';
-        } else {
-          dayElement.className = 'day red';
-        }
+        dayElement.className = isGoodDay
+          ? 'day green'
+          : isAcceptableDay
+          ? 'day yellow'
+          : 'day red';
 
         dayElement.innerHTML = `
           <img src="${weatherIconUrl}" alt="${weather}" />
@@ -180,8 +176,7 @@ const generateCalendar = async (cityName) => {
             ${date.toLocaleDateString()}<br>
             ${weather}<br>
             High: ${highTemp}°F | Low: ${lowTemp}°F<br>
-            Wind: ${windSpeed} m/s | Humidity: ${humidity}%<br>
-            Cloud Coverage: ${cloudCoverage}% | Precipitation: ${precipitation} mm
+            Humidity: ${humidity}% | Cloud Coverage: ${cloudCoverage}%
           </span>
         `;
       }
@@ -207,17 +202,23 @@ citySearchForm.addEventListener('submit', async (e) => {
 });
 
 // Handle Settings Form Submission
-document.getElementById('settings-form').addEventListener('submit', (e) => {
+document.getElementById('settings-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const preferences = getUserPreferences();
   savePreferences(preferences);
-  alert('Preferences saved successfully!');
+
+  modal.style.display = 'none';
+
+  const cities = getSavedCities();
+  if (cities.length > 0) {
+    await generateCalendar(cities[0].name);
+  }
 });
 
 // Initialize the App
 const initializeApp = async () => {
-  populateSettingsForm(); // Populate settings form with saved preferences
-  renderCityList(); // Render saved cities
+  populateSettingsForm();
+  renderCityList();
   const cities = getSavedCities();
   if (cities.length > 0) {
     await generateCalendar(cities[0].name);
